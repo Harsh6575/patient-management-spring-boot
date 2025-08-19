@@ -1,12 +1,13 @@
 package com.hv.patient_service.dto;
 
+import com.hv.patient_service.dto.validators.CreatePatientValidationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class PatientRequestDTO {
     @NotBlank(message = "Name is required")
-    @Size(max=100,message = "Name cannot exceed 100 characters")
+    @Size(max = 100, message = "Name cannot exceed 100 characters")
     private String name;
 
     @NotBlank(message = "Email is required")
@@ -14,13 +15,13 @@ public class PatientRequestDTO {
     private String email;
 
     @NotBlank(message = "Address is required")
-    @Size(max=255, message = "Address cannot exceed 255 characters")
+    @Size(max = 255, message = "Address cannot exceed 255 characters")
     private String address;
 
     @NotBlank(message = "Date of Birth is required")
     private String dateOfBirth;
 
-    @NotBlank(message = "registeredDate Date is required")
+    @NotBlank(groups = CreatePatientValidationGroup.class, message = "registeredDate Date is required")
     private String registeredDate;
 
     public String getName() {
