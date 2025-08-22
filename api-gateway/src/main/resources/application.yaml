@@ -1,0 +1,29 @@
+server:
+  port: 4004
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        # =====================================
+        # PATIENT SERVICE ROUTES (Port: 4000)
+        # =====================================
+        ## REST CLIENT -> http://localhost:4004/api/patients
+        ## API GATEWAY -> http://patient-service:4000/patients
+        ## PATIENT SERVICE (SPRING BOOT) -> /patients (Controller) will return patients array
+        - id: patient-service-route
+          uri: http://patient-service:4000
+          predicates:
+            - Path=/api/patients/**
+          filters:
+            - StripPrefix=1 # Remove /api prefix before forwarding
+
+        ## OpenAPI docs for patient service
+        - id: patient-service-docs
+          uri: http://patient-service:4000
+          predicates:
+            - Path=/api-docs/patients
+          filters:
+            - RewritePath=/api-docs/patients, /v3/api-docs
