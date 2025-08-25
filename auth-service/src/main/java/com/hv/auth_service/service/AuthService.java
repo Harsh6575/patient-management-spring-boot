@@ -2,6 +2,7 @@ package com.hv.auth_service.service;
 
 import com.hv.auth_service.dto.LoginRequestDTO;
 import com.hv.auth_service.util.JwtUtil;
+import io.jsonwebtoken.JwtException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,15 @@ public class AuthService {
         Optional<String> token = userService.findByEmail(loginRequestDTO.getEmail()).filter(u -> passwordEncoder.matches(loginRequestDTO.getPassword(), u.getPassword())).map(u -> jwtUtil.generateToken(u.getEmail(), u.getRole()));
 
         return token;
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            jwtUtil.validateToken(token);
+            return true;
+        } catch (JwtException e) {
+            return false;
+        }
     }
 
 }
