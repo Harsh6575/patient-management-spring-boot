@@ -44,3 +44,11 @@ spring:
             - Path=/api-docs/patients
           filters:
             - RewritePath=/api-docs/patients, /v3/api-docs
+
+        ## OpenAPI docs for auth service
+        - id: auth-service-docs
+          uri: http://auth-service:4005
+          predicates:
+              - Path=/api-docs/auth
+          filters:
+                - RewritePath=/api-docs/auth, /v3/api-docs
