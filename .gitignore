@@ -22,6 +22,10 @@ Thumbs.db
 
 # Temporary files
 *.swp
+
+# Env files (important!)
+*.env
+
 *~
 
 # My Db Backup files
