@@ -1,0 +1,11 @@
+# Ignore node_modules, build artifacts, IDE files, envs
+node_modules
+target
+build
+.gradle
+*.iml
+*.log
+*.env
+.DS_Store
+.idea
+.vscode
